@@ -20,5 +20,6 @@ export const laptopSlice = createSlice({
     }
 })
 
+export const laptopSliceSelector = (store: any) => store.laptopSlice.count
 export const { addLaptop, removeLaptop } = laptopSlice.actions;
 export default laptopSlice.reducer;

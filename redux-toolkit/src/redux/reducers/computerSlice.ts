@@ -18,5 +18,6 @@ export const computerSlice = createSlice({
     }
 })
 
+export const computerSliceSelector = (store: any) => store.computerSlice.count;
 export const { addComputer, removeComputer } = computerSlice.actions;
 export default computerSlice.reducer;
