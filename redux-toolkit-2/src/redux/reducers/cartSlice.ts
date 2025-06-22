@@ -19,3 +19,6 @@ export const { addItemToCart } = cartSlice.actions;
 
 //export single reducer
 export const cartSliceReducer = cartSlice.reducer;
+
+// export selectors
+export const selectCart = ({ cart } : any) => cart;
