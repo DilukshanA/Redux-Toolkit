@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { selectLaptop, type laptopTypes } from "../redux/reducers/laptopSlice"
-import { addItemToCart } from "../redux/reducers/cartSlice";
+import { addItemToCart, type laptopCartTypes } from "../redux/reducers/cartSlice";
 
 const Laptops = () => {
 
@@ -22,7 +22,7 @@ const Laptops = () => {
                         price: laptop.price,
                         cpu: laptop.cpu,
                         ram: laptop.ram
-                    }
+                    }  as laptopCartTypes
                     ))}
                 >
                     Add to Cart

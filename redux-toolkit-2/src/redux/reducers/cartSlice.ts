@@ -1,22 +1,34 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { laptopTypes } from "./laptopSlice";
 
-const initialState : laptopTypes[] = []
+export type laptopCartTypes = laptopTypes & {
+    count: number;
+}
+
+const initialState : laptopCartTypes[] = []
 
 const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
         addItemToCart: {
-            reducer: (state, action: PayloadAction<laptopTypes>) => {
-                state.push(action.payload);
+            reducer: (state, action: PayloadAction<laptopCartTypes>) => {
+                const id = action.payload.id;
+                const existingItem = state.find(item => item.id === id);
+                if (existingItem) {
+                    existingItem.count += 1;
+                    return;
+                } else {
+                    state.push(action.payload);
+                }
             },
-            prepare: ({ id, price, cpu, ram } : laptopTypes) => ({
+            prepare: ({ id, price, cpu, ram } : laptopCartTypes) => ({
                 payload: {
                     id,
                     price,
                     cpu,
-                    ram
+                    ram,
+                    count: 1
                 }
             })
         }
