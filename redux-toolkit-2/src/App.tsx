@@ -1,4 +1,5 @@
 import './App.css'
+import Cart from './components/Cart'
 import Laptops from './components/Laptops'
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
   return (
     <>
       <Laptops/>
+      <Cart/>
     </>
   )
 }

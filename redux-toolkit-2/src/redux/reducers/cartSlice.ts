@@ -1,12 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { laptopTypes } from "./laptopSlice";
 
-const initialState : any = []
+const initialState : laptopTypes[] = []
+
 const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
-        addItemToCart: (state, action) => {
-            state.push(action.payload);
+        addItemToCart: {
+            reducer: (state, action: PayloadAction<laptopTypes>) => {
+                state.push(action.payload);
+            },
+            prepare: ({ id, price, cpu, ram } : laptopTypes) => ({
+                payload: {
+                    id,
+                    price,
+                    cpu,
+                    ram
+                }
+            })
         }
     }
 })
