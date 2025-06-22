@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import axios from "axios";
 
@@ -21,7 +21,7 @@ const initialState : PersonSate = {
     error: false
 }
 
-export const fetchAllPerson = createAsyncThunk<Person[]>(
+export const fetchAllPerson = createAsyncThunk(
     "person/fetchAllPerson",
     async () => {
         try {
@@ -71,4 +71,13 @@ export const personSliceReducer = personSlice.reducer;
 
 // export selectors
 // Other code such as selectors can use the imported `RootState` type
-export const selectPersonData = (state: RootState) => state.allPersons;
+
+export const selectPersonData = (state: RootState) =>  state.allPersons;
+
+// export const selectPersonData = createSelector(
+//     [(state: RootState) => state.allPersons], // dependency array
+//     (allPersons) => {
+//         //console.log("running selectPersonData", allPersons);
+//         return allPersons;
+//     }
+// )
