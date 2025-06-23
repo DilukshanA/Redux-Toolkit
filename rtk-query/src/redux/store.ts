@@ -1,11 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { personSliceReducer } from "./reducers/personSlice";
+import { personApiSlice } from "./reducers/personApiSlice";
 
 const store = configureStore({
     reducer: {
-        persons: personSliceReducer
+        persons: personSliceReducer,
+        [personApiSlice.reducerPath]: personApiSlice.reducer
+    },
+    // Adding the api middleware enables caching, invalidation, polling and other features of RTK Query
+    middleware: (getDefaultMiddleware) => {
+        return getDefaultMiddleware().concat(
+            personApiSlice.middleware
+        );
     }
-})
+});
 
 export default store;
 
