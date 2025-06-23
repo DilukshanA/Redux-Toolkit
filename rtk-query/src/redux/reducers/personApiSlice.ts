@@ -13,9 +13,15 @@ export const personApiSlice = createApi({
                 method: "GET"
             })
         }),
+        getPersonById: builder.query({
+            query: (id: string) => ({
+                url: `/person/${id}`,
+                method: "GET"
+            })
+        })
     })
 })
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllPersonsQuery } = personApiSlice;
+export const { useGetAllPersonsQuery, useGetPersonByIdQuery } = personApiSlice;
