@@ -1,11 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-type Person = {
-    _id: string;
-    name: string;
-    age: number;
-    email: string;
-}
+import type { Person } from "../../types/Peron";
 
 export const personApiSlice = createApi({
     reducerPath: "personApi",
