@@ -1,10 +1,15 @@
-import { Box, Button, Grid } from "@mui/material"
+import { Box, Button, Grid, Typography } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
 import { selectPersons } from "../redux/reducers/personSlice";
+import { useGetAllPersonsQuery } from "../redux/reducers/personApiSlice";
 
 
 const Person = () => {
+
+    const { data: persons, isLoading } = useGetAllPersonsQuery();
+
+    console.log("persons : ", isLoading);
 
   // navigate to edit person page
 
@@ -14,16 +19,17 @@ const Person = () => {
     navigate(`/edit-person/${id}`);
   }
 
-  const personsObject = useSelector(selectPersons);
+//   const personsObject = useSelector(selectPersons);
 
-  const persons = personsObject.data;
-
-  console.log("persons : ", personsObject);
-
-  if (personsObject.loading) {
-    return <Box>Loading...</Box>
+  if (isLoading) {
+    return (
+        <Box>
+            <Typography variant="h3">
+                Loading...
+            </Typography>
+        </Box>
+    )
   }
-  
 
   return (
     <Box sx={{ flexGrow: 1 }}>
