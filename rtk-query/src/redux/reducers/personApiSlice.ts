@@ -13,7 +13,7 @@ export const personApiSlice = createApi({
                 method: "GET"
             })
         }),
-        getPersonById: builder.query({
+        getPersonById: builder.query<Person, string>({
             query: (id: string) => ({
                 url: `/person/${id}`,
                 method: "GET"
