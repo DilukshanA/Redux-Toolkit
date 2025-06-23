@@ -7,7 +7,7 @@ import { useGetAllPersonsQuery } from "../redux/reducers/personApiSlice";
 
 const Person = () => {
 
-    const { data: persons, isLoading } = useGetAllPersonsQuery();
+    const { data: persons, isLoading, isError } = useGetAllPersonsQuery();
 
     console.log("persons : ", isLoading);
 
@@ -26,6 +26,16 @@ const Person = () => {
         <Box>
             <Typography variant="h3">
                 Loading...
+            </Typography>
+        </Box>
+    )
+  }
+
+  if (isError) {
+    return (
+        <Box>
+            <Typography variant="h3">
+                Error loading persons
             </Typography>
         </Box>
     )
