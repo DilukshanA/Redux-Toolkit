@@ -15,11 +15,6 @@ const EditPerson = () => {
 
     const { data: person, isLoading, isError} = useGetPersonByIdQuery(id as string);
 
-    console.log("data : ", isLoading);
-
-
-
-
     const [personData, setPersonData] = useState<Person>({
         name: "",
         age: 0,
