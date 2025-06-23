@@ -1,14 +1,7 @@
 import { Box, Button, Grid } from "@mui/material"
-//import { person } from "../data/person"
 import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react";
-
-type PersonType = {
-  _id: string;
-  name: string;
-  age: number;
-  email: string;
-}
+import { useSelector } from "react-redux";
+import { selectPersons } from "../redux/reducers/personSlice";
 
 
 const Person = () => {
@@ -21,12 +14,16 @@ const Person = () => {
     navigate(`/edit-person/${id}`);
   }
 
-  const [persons, setPersons] = useState<PersonType[]>([]);
+  const personsObject = useSelector(selectPersons);
 
+  const persons = personsObject.data;
 
-  useEffect(()=> {
-    console.log("persons : ", persons);
-  },[persons])
+  console.log("persons : ", personsObject);
+
+  if (personsObject.loading) {
+    return <Box>Loading...</Box>
+  }
+  
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -51,7 +48,7 @@ const Person = () => {
           </Grid>
         </Grid>
 
-        {persons.map((p, index) => (
+        {persons?.map((p, index) => (
         <Grid key={index} container direction="row" size={12} spacing={2} sx={{ mt: 2 }}>
           <Grid size={3} display="flex" justifyContent="start" alignItems="center">
             <Box>{p.name}</Box>
