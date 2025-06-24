@@ -1,4 +1,8 @@
 import { Box, Button, Grid, Typography } from "@mui/material"
+import IconButton from '@mui/material/IconButton';
+import Person2Icon from '@mui/icons-material/Person2';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
 import { selectPersons } from "../redux/reducers/personSlice";
@@ -15,8 +19,13 @@ const Person = () => {
 
   const navigate = useNavigate();
 
-  const handleEditRoute = (id : string) => {
-    navigate(`/edit-person/${id}`);
+  const handleEditRoute = (id : string, route: string) => {
+    if(route === "edit-person") {
+      navigate(`/edit-person/${id}`);
+    } else if(route === "view-person") {
+      navigate(`/view-person/${id}`);
+    }
+    
   }
 
 //   const personsObject = useSelector(selectPersons);
@@ -72,21 +81,28 @@ const Person = () => {
           <Grid size={1} display="flex" justifyContent="start" alignItems="center">
             <Box >{p.age}</Box>
           </Grid>
-          <Grid size={3} display="flex" justifyContent="start" alignItems="center">
+          <Grid size={4} display="flex" justifyContent="start" alignItems="center">
             <Box>{p.email}</Box>
           </Grid>
-          <Grid size={2} display="flex" justifyContent="start" alignItems="center" sx={{ ml: 2 }}>
-            <Button variant="contained" color="primary" size="small"
-              onClick={() => handleEditRoute(p._id)}
+          <Grid size={1} display="flex" justifyContent="start" alignItems="center" sx={{ ml: 2 }}>
+            <IconButton aria-label="edit"
+              onClick={() => handleEditRoute(p._id, "view-person")}
             >
-                Edit
-            </Button>
+              <Person2Icon color="success"/>
+            </IconButton>
           </Grid>
-          <Grid size={2} display="flex" justifyContent="start" alignItems="center">
-            <Button variant="contained" color="error" size="small"
+          <Grid size={1} display="flex" justifyContent="start" alignItems="center" sx={{ ml: 2 }}>
+            <IconButton aria-label="edit"
+              onClick={() => handleEditRoute(p._id, "edit-person")}
             >
-                Delete
-            </Button>
+              <EditIcon color="info"/>
+            </IconButton>
+          </Grid>
+          <Grid size={1} display="flex" justifyContent="start" alignItems="center">
+            <IconButton aria-label="edit"
+            >
+              <DeleteIcon color="error"/>
+            </IconButton>
           </Grid>
         </Grid>
         ))}
