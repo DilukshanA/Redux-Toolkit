@@ -70,5 +70,6 @@ export const {
     useGetAllPersonsQuery,
     useGetPersonByIdQuery,
     useAddPersonMutation,
-    useUpdatePersonMutation
+    useUpdatePersonMutation,
+    useDeletePersonMutation
 } = personApiSlice;
