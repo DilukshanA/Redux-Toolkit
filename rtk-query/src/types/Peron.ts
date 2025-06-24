@@ -4,3 +4,5 @@ export type Person = {
     age: number;
     email: string;
 }
+
+export type PersonType = Omit<Person, "_id">; // Use this instead of duplicating structure
