@@ -2,20 +2,18 @@ import { useParams } from "react-router-dom"
 import { Box, Button, TextField, Typography } from "@mui/material"
 import React, { useEffect, useState } from "react";
 import { useGetPersonByIdQuery } from "../redux/reducers/personApiSlice";
+import type { Person } from "../types/Peron";
 
-type Person = {
-    name: String;
-    age: Number;
-    email: String;
-}
+
 
 const EditPerson = () => {
 
     const  { id }  = useParams<{ id : string}>();
 
-    const { data: person, isLoading, isError} = useGetPersonByIdQuery(id as string);
+    const { data: person, isLoading: getPersonLoading, isError: getPersonError} = useGetPersonByIdQuery(id as string);
 
     const [personData, setPersonData] = useState<Person>({
+        _id: id as string,
         name: "",
         age: 0,
         email: ""
@@ -24,6 +22,7 @@ const EditPerson = () => {
     useEffect(() => {
         if (person) {
             setPersonData({
+                ...personData,
                 name: person.name,
                 age: person.age,
                 email: person.email
@@ -39,7 +38,7 @@ const EditPerson = () => {
         })
     }
 
-    if (isLoading) {
+    if (getPersonLoading) {
         return (
             <Box>
                 <Typography variant="h3">
@@ -48,7 +47,7 @@ const EditPerson = () => {
             </Box>
         )
     }
-    if (isError) {
+    if (getPersonError) {
         return (
             <Box>
                 <Typography variant="h3">

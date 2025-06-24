@@ -36,7 +36,6 @@ const AddPerson = () => {
             await addPerson(person).unwrap();
             setOpen(true);
         } catch (error) {
-            console.error("Failed to add person: ", error);
             setOpen(true);
         }
     }
