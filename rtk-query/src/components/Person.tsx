@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
 import { selectPersons } from "../redux/reducers/personSlice";
 import { useGetAllPersonsQuery } from "../redux/reducers/personApiSlice";
+import DeletePerson from "./DeletePerson";
 
 
 const Person = () => {
@@ -99,10 +100,11 @@ const Person = () => {
             </IconButton>
           </Grid>
           <Grid size={1} display="flex" justifyContent="start" alignItems="center">
-            <IconButton aria-label="edit"
+            {/* <IconButton aria-label="edit"
             >
               <DeleteIcon color="error"/>
-            </IconButton>
+            </IconButton> */}
+            <DeletePerson id={p._id} />
           </Grid>
         </Grid>
         ))}
