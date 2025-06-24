@@ -13,7 +13,7 @@ const Person = () => {
 
     const { data: persons, isLoading, isError } = useGetAllPersonsQuery();
 
-    console.log("persons : ", isLoading);
+    // console.log("persons : ", isLoading);
 
   // navigate to edit person page
 

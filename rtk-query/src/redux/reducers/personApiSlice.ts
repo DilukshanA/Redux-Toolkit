@@ -40,6 +40,16 @@ export const personApiSlice = createApi({
             invalidatesTags: (result) => (
                 result ? [{ type: "Person", id: "LIST" }] : []
             )
+        }),
+        updatePerson: builder.mutation<Person, PersonType>({
+            query: (updatedPerson: Person) => ({
+                url: `/person/${updatedPerson._id}`,
+                method: "PUT",
+                body: updatedPerson
+            }),
+            invalidatesTags: (result) => (
+                result ? [{ type: "Person", id: result._id }] : []
+            )
         })
     })
 })
