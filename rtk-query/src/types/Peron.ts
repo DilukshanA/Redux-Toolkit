@@ -1,3 +1,5 @@
+// person used for get and update operations
+// PersonType used for adding new person
 export type Person = {
     _id: string;
     name: string;

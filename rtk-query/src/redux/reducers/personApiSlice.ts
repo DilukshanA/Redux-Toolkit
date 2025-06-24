@@ -41,13 +41,14 @@ export const personApiSlice = createApi({
                 result ? [{ type: "Person", id: "LIST" }] : []
             )
         }),
-        updatePerson: builder.mutation<Person, PersonType>({
+        updatePerson: builder.mutation<Person, Person>({
             query: (updatedPerson: Person) => ({
                 url: `/person/${updatedPerson._id}`,
                 method: "PUT",
                 body: updatedPerson
             }),
             invalidatesTags: (result) => (
+                console.log("update tag"),
                 result ? [{ type: "Person", id: result._id }] : []
             )
         })
@@ -59,5 +60,6 @@ export const personApiSlice = createApi({
 export const { 
     useGetAllPersonsQuery,
     useGetPersonByIdQuery,
-    useAddPersonMutation 
+    useAddPersonMutation,
+    useUpdatePersonMutation
 } = personApiSlice;
