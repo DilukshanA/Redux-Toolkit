@@ -48,9 +48,18 @@ export const personApiSlice = createApi({
                 body: updatedPerson
             }),
             invalidatesTags: (result) => (
-                console.log("update tag"),
                 result ? [{ type: "Person", id: result._id }] : []
             )
+        }),
+        deletePerson: builder.mutation<void, string>({
+            query: (id: string) => ({
+                url: `/person/${id}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: (result, error, id) => [
+                { type: "Person", id }, // Invalidate the specific person by id
+                { type: "Person", id: "LIST" } // Invalidate list so it's refetched
+            ]
         })
     })
 })
