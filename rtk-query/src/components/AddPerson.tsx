@@ -1,5 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material"
 import { useState } from "react";
+import { useAddPersonMutation } from "../redux/reducers/personApiSlice";
 
 type PersonType = {
     name: string;
@@ -21,6 +22,19 @@ const AddPerson = () => {
             [e.target.id]: e.target.value
         })
     }
+
+    console.log("person : ", person);
+
+    const [addPerson, { isLoading, isError, error }] = useAddPersonMutation();
+
+    const handleSubmit = async () => {
+        try {
+            await addPerson(person).unwrap();
+        } catch (error) {
+            console.error("Failed to add person: ", error);
+        }
+    }
+    
     
   return (
     <Box>
@@ -51,8 +65,9 @@ const AddPerson = () => {
             />
             <Button variant="contained" color="primary" size="large" sx={{ mt: 2 }}
                 disabled={!person.name || !person.age || !person.email} // Disable if any field is empty
+                onClick={handleSubmit}
             >
-                Submit
+                {isLoading ? "Adding..." : "Add Person"}
             </Button>
         </Box>
     </Box>

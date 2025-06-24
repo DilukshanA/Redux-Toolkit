@@ -66,7 +66,7 @@ const Person = () => {
           </Grid>
           <Grid size={2} display="flex" justifyContent="start" alignItems="center" sx={{ ml: 2 }}>
             <Button variant="contained" color="success" size="small"
-            href="/add-person"
+            onClick={() => navigate("/add-person")}
             >
                 Add
             </Button>

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { Person } from "../../types/Peron";
+import type { Person, PersonType } from "../../types/Peron";
 
 export const personApiSlice = createApi({
     reducerPath: "personApi",
@@ -30,10 +30,24 @@ export const personApiSlice = createApi({
             providesTags: (result) => (
                 result ? [{ type: "Person", id: result._id }] : []
             )
+        }),
+        addPerson: builder.mutation<Person, PersonType>({
+            query: (newPerson: Person) => ({
+                url: "/person",
+                method: "POST",
+                body: newPerson
+            }),
+            invalidatesTags: (result) => (
+                result ? [{ type: "Person", id: "LIST" }] : []
+            )
         })
     })
 })
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllPersonsQuery, useGetPersonByIdQuery } = personApiSlice;
+export const { 
+    useGetAllPersonsQuery,
+    useGetPersonByIdQuery,
+    useAddPersonMutation 
+} = personApiSlice;
